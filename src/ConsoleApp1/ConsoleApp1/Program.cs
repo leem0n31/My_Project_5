@@ -2,7 +2,7 @@
 
 namespace RoguelikeGame
 {
-    // Игрок
+    
     public class Player
     {
         public string Name { get; set; }
@@ -25,7 +25,7 @@ namespace RoguelikeGame
         public void Attack(Enemy enemy) => enemy.Health -= Weapon.Damage;
     }
 
-    // Враг
+    
     public class Enemy
     {
         public string Name { get; set; }
@@ -44,7 +44,7 @@ namespace RoguelikeGame
         public void Attack(Player player) => player.Health -= Weapon.Damage;
     }
 
-    // Аптечка
+    
     public class Aid
     {
         public string Name { get; set; }
@@ -57,7 +57,7 @@ namespace RoguelikeGame
         }
     }
 
-    // Оружие
+    
     public class Weapon
     {
         public string Name { get; set; }
@@ -82,10 +82,10 @@ namespace RoguelikeGame
             Console.Write("Назови себя: ");
             string playerName = Console.ReadLine();
 
-            // Создаем игрока
+            
             Player player = new Player(playerName, 100);
 
-            // Даем игроку оружие и аптечку
+            
             player.Weapon = GenerateWeapon();
             player.Aid = GenerateAid();
 
@@ -93,15 +93,15 @@ namespace RoguelikeGame
             Console.WriteLine($"Вам был ниспослан меч {player.Weapon.Name} ({player.Weapon.Damage}), а также {player.Aid.Name} ({player.Aid.HealAmount}hp).");
             Console.WriteLine($"У вас {player.Health}hp.");
 
-            // Играем до тех пор, пока у игрока не закончится здоровье
+            
             while (player.Health > 0)
             {
-                // Создаем врага
+            
                 Enemy enemy = GenerateEnemy();
 
                 Console.WriteLine($"{player.Name} встречает врага {enemy.Name} ({enemy.Health}hp), у врага на поясе сияет оружие {enemy.Weapon.Name} ({enemy.Weapon.Damage})");
 
-                // Бой с врагом
+                
                 while (player.Health > 0 && enemy.Health > 0)
                 {
                     Console.WriteLine("Что вы будете делать?");
@@ -156,7 +156,7 @@ namespace RoguelikeGame
             Console.ReadKey();
         }
 
-        // Генерация случайного оружия
+        
         static Weapon GenerateWeapon()
         {
             string[] names = { "Фламберг", "Экскалибур", "Меч Звезды", "Кинжал", "Топор" };
@@ -166,7 +166,7 @@ namespace RoguelikeGame
             return new Weapon(names[rnd.Next(names.Length)], damage, durability);
         }
 
-        // Генерация случайной аптечки
+        
         static Aid GenerateAid()
         {
             string[] names = { "Средняя аптечка", "Большая аптечка", "Малая аптечка" };
@@ -175,7 +175,7 @@ namespace RoguelikeGame
             return new Aid(names[rnd.Next(names.Length)], healAmount);
         }
 
-        // Генерация случайного врага
+        
         static Enemy GenerateEnemy()
         {
             string[] names = { "Варвар", "Орк", "Голем", "Скелет", "Зомби" };
